@@ -24,7 +24,7 @@ def create_df(r):
 def main():
     r = get_ticket_info()
     df = create_df(r)
-    with sqlite3.connect("temps.db") as conn: 
+    with sqlite3.connect("tickets.db") as conn: 
         df.to_sql("extraction", conn, if_exists = "append", index = False)
 
 if __name__ == "__main__":
