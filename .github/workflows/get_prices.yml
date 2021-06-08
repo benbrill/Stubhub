@@ -6,7 +6,7 @@ name: Update Tabel
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   schedule: 
-    - cron: "0 12,0 * * *"
+    - cron: "30 12,14,0 * * *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
