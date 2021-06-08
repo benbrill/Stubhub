@@ -1,7 +1,4 @@
 pandas
 numpy
-# sqlite3
-# datetime
-selenium
 requests
 re
