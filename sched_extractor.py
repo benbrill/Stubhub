@@ -2,11 +2,14 @@ import sqlite3
 import requests
 import datetime
 import pandas as pd 
+import os
+
+ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
 
 def get_ticket_info():
     url = "https://api.stubhub.com/sellers/search/events/v3?venueId=744&performerId=1061&parking=false&sort=eventDateLocal%20asc&rows=81"
     headers = { 
-    "Authorization": "Bearer JA5o8vrYmwMO5akh50E4crz6i9XI",
+    "Authorization": "Bearer " + ACCESS_TOKEN,
     "Accept": "application/json"
     }
     r = requests.get(url, headers=headers)
