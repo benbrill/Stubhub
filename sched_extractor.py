@@ -17,7 +17,13 @@ def get_ticket_info():
 
 def create_df(r):
     events = r.json()['events']
-    prices = {event['id']: {"price": event['ticketInfo']['minPrice'], "time":event['eventDateLocal'], "name":event['name'], "extractTime":datetime.datetime.today()} for event in events}
+    prices = {event['id']:{
+         "price": event['ticketInfo']['minPrice'],
+         "time" : event['eventDateLocal'],
+         "name" : event['name'],
+         "extractTime":datetime.datetime.today(),
+         "homeTeam" : event['performers'][0]['name'],
+         "awayTeam" : event['performers'][1]['name']} for event in events}
     df = pd.DataFrame(prices).T.reset_index().rename({"index":"id"}, axis = 1)
     df['time'] = pd.to_datetime(df['time'].str[0:10])
     df['days_to_game'] = (df['time'] - df['extractTime'])
