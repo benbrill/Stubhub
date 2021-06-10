@@ -19,7 +19,7 @@ def create_df(r):
     events = r.json()['events']
     prices = {event['id']:{
          "price": event['ticketInfo']['minPrice'],
-         "time" : event['eventDateLocal'],
+         "time" : event['eventDateUTC'],
          "name" : event['name'],
          "extractTime":datetime.datetime.today(),
          "homeTeam" : event['performers'][0]['name'],
