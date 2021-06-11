@@ -19,17 +19,9 @@ def create_df(r):
     events = r.json()['events']
     prices = {event['id']:{
          "price": event['ticketInfo']['minPrice'],
-         "time" : event['eventDateLocal'],
-         "name" : event['name'],
          "extractTime":datetime.datetime.today(),
-         "homeTeam" : event['performers'][0]['name'],
-         "awayTeam" : event['performers'][1]['name'],
          "ticket_count": event["ticketInfo"]["totalTickets"]} for event in events}
     df = pd.DataFrame(prices).T.reset_index().rename({"index":"id"}, axis = 1)
-    df["unique_name"] = df["name"] + ": " + df["time"].str[0:10]
-    df['time'] = pd.to_datetime(df['time'].str[0:10])
-    df['days_to_game'] = (df['time'] - df['extractTime'])
-    df['days_to_game'] = df['days_to_game'].apply(lambda X: X.days)
     return df
 
 def main():
