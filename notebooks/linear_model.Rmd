@@ -1,6 +1,6 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Linear Model"
+output: pdf_document
 ---
 
 ```{r}
@@ -11,13 +11,26 @@ library(dplyr)
 df <- read.csv("training_df.csv")
 df$homeTeam <- factor(df$homeTeam)
 df$awayTeam <- factor(df$awayTeam)
-df
+head(df)
 ```
 ```{r}
-model <- lm(price~ homeTeam + awayTeam + ticket_count + days_to_game, data = df)
+model <- lm(price~ homeTeam + awayTeam + days_to_game, data = df)
 model
 ```
 ```{r}
 summary(model)
+```
+## Predictions
+```{r}
+predict_df <- data.frame("homeTeam" = "Los Angeles Dodgers",
+                         "awayTeam" = "New York Yankees",
+                         # "ticket_count" = 2000,
+                         "days_to_game" = 0)
+predict(model, predict_df)
+predict_df <- data.frame("homeTeam" = "Los Angeles Dodgers",
+                         "awayTeam" = "New York Yankees",
+                         # "ticket_count" = 2000,
+                         "days_to_game" = 70)
+predict(model, predict_df)
 ```
 
