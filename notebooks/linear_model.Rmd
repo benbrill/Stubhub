@@ -1,0 +1,23 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+df <- read.csv("training_df.csv")
+df$homeTeam <- factor(df$homeTeam)
+df$awayTeam <- factor(df$awayTeam)
+df
+```
+```{r}
+model <- lm(price~ homeTeam + awayTeam + ticket_count + days_to_game, data = df)
+model
+```
+```{r}
+summary(model)
+```
+
